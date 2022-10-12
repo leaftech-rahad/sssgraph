@@ -1,0 +1,9 @@
+npm i graphql-request apollo-server-micro graphql react-query bcryptjs joi @prisma/client @graphql-tools/schema cors apollo-server-core
+
+npm i -D @graphql-codegen/cli @graphql-codegen/typescript @graphql-codegen/typescript-graphql-request @graphql-codegen/typescript-operations @graphql-codegen/typescript-react-query typescript prisma
+
+npx prisma init --datasource-provider postgresql
+
+npx prisma generate
+
+
