@@ -31,7 +31,7 @@ export default function Home() {
         <h1 className={styles.title}>
           Welcome to <a href="https://nextjs.org">Next.js!</a>
         </h1>
-        <div>{process.env.VERCEL_URL}</div>
+
         <div>
           {data?.allUsers.map((user, i) => (
             <div key={i}>
