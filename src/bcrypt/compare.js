@@ -1,5 +1,5 @@
 import bcrypt from "bcryptjs";
 
-export default async function matchedPassword(password) {
+export const comparePassword = async (password, hash) => {
   return bcrypt.compareSync(password, hash);
-}
+};
