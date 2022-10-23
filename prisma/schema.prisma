@@ -6,10 +6,86 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider = "sqlite"
+  url      = "file:./dev.db"
 }
 
+// datasource db {
+//   provider = "mongodb"
+//   url      = env("DATABASE_URL")
+// }
+
+// datasource db {
+//   provider = "postgresql"
+//   url      = env("DATABASE_URL")
+// }
+//---------------------------------------------------------
+//mongodb
+// model User {
+//   id        String   @id @default(auto()) @map("_id") @db.ObjectId
+//   name      String
+//   email     String   @unique
+//   username  String   @unique
+//   password  String
+//   phone     String
+//   address   String
+//   role      Role     @default(Member)
+//   post      Post[]   @relation("writtenPost")
+//   createdAt DateTime @default(now())
+//   updatedAt DateTime @updatedAt
+// }
+
+// enum Role {
+//   Admin
+//   Member
+//   Student
+// }
+
+// model Post {
+//   id        String   @id @default(auto()) @map("_id") @db.ObjectId
+//   username  String?
+//   author    User?    @relation("writtenPost", references: [username], fields: [username])
+//   title     String
+//   content   String
+//   createdAt DateTime @default(now())
+//   updatedAt DateTime @updatedAt
+// }
+
+//----------------------------------------------
+//postgres
+// model User {
+//   id        String   @id @default(uuid())
+//   name      String
+//   email     String   @unique
+//   username  String   @unique
+//   password  String
+//   phone     String
+//   address   String
+//   role      Role     @default(Member)
+//   post      Post[]   @relation("writtenPost")
+//   createdAt DateTime @default(now())
+//   updatedAt DateTime @updatedAt
+
+//   @@index([username])
+// }
+
+// enum Role {
+//   Admin
+//   Member
+//   Student
+// }
+
+// model Post {
+//   id        String   @id @default(uuid())
+//   username  String?
+//   author    User?    @relation("writtenPost", references: [username], fields: [username])
+//   title     String
+//   content   String
+//   createdAt DateTime @default(now())
+//   updatedAt DateTime @updatedAt
+// }
+//--------------------------------------------------
+//sqlite3
 model User {
   id        String   @id @default(uuid())
   name      String
@@ -18,18 +94,12 @@ model User {
   password  String
   phone     String
   address   String
-  role      Role     @default(Member)
+  role      String   @default("Member")
   post      Post[]   @relation("writtenPost")
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   @@index([username])
-}
-
-enum Role {
-  Admin
-  Member
-  Student
 }
 
 model Post {

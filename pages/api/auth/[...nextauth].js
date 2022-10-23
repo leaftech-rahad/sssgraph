@@ -1,6 +1,9 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import EmailProvider from "next-auth/providers/email";
 import { comparePassword } from "../../../src/bcrypt/compare";
+import { PrismaAdapter } from "@next-auth/prisma-adapter";
+import prisma from "./lib/prismadb";
 import { db } from "../../../prisma/db";
 export default NextAuth({
   session: {
@@ -8,7 +11,7 @@ export default NextAuth({
     maxAge: 2 * 24 * 60 * 60, // 2 day
     updateAge: 2 * 60 * 60, // 2 hours
   },
-
+  //adapter: PrismaAdapter(prisma),
   providers: [
     CredentialsProvider({
       name: "Credentials",
@@ -35,7 +38,7 @@ export default NextAuth({
         if (matchPassword) {
           // Any object returned will be saved in `user` property of the JWT
           return {
-            id: user.ID,
+            id: user.id,
             username: user.username,
             email: user.email,
             role: user.role,
@@ -48,6 +51,18 @@ export default NextAuth({
         }
       },
     }),
+    // EmailProvider({
+    //   server: {
+    //     host: process.env.EMAIL_SERVER_HOST,
+    //     port: process.env.EMAIL_SERVER_PORT,
+    //     auth: {
+    //       user: process.env.EMAIL_SERVER_USER,
+    //       pass: process.env.EMAIL_SERVER_PASSWORD,
+    //     },
+    //   },
+    //   from: process.env.EMAIL_FROM,
+    //   // maxAge: 24 * 60 * 60, // How long email links are valid for (default 24h)
+    // }),
   ],
 
   callbacks: {
