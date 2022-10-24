@@ -1,5 +1,5 @@
-query getUsers {
-  allUsers {
+query getUser($input: findUser) {
+  findUser(input: $input) {
     id
     name
     email

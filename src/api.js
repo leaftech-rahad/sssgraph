@@ -5,7 +5,7 @@ import { SERVER_URL } from "../src/config";
 // const gqlClient = new GraphQLClient("http://localhost:3000/api/graphql");
 
 const gqlClient = new GraphQLClient(SERVER_URL);
-export const { allusers } = getSdk(gqlClient);
+export const { getUser, getUsers } = getSdk(gqlClient);
 
 export const queryClient = new QueryClient({
   defaultOptions: {

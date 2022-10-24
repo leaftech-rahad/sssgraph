@@ -124,16 +124,44 @@ export type SignIn = {
   password: Scalars['String'];
 };
 
-export type AllusersQueryVariables = Exact<{ [key: string]: never; }>;
+export type GetUserQueryVariables = Exact<{
+  input?: InputMaybe<FindUser>;
+}>;
 
 
-export type AllusersQuery = { __typename?: 'Query', allUsers: Array<{ __typename?: 'User', id: string }> };
+export type GetUserQuery = { __typename?: 'Query', findUser?: { __typename?: 'User', id: string, name: string, email: string, username?: string | null, phone?: string | null, address?: string | null, role?: string | null, createdAt: any } | null };
+
+export type GetUsersQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export const AllusersDocument = gql`
-    query allusers {
+export type GetUsersQuery = { __typename?: 'Query', allUsers: Array<{ __typename?: 'User', id: string, name: string, email: string, username?: string | null, phone?: string | null, address?: string | null, role?: string | null, createdAt: any }> };
+
+
+export const GetUserDocument = gql`
+    query getUser($input: findUser) {
+  findUser(input: $input) {
+    id
+    name
+    email
+    username
+    phone
+    address
+    role
+    createdAt
+  }
+}
+    `;
+export const GetUsersDocument = gql`
+    query getUsers {
   allUsers {
     id
+    name
+    email
+    username
+    phone
+    address
+    role
+    createdAt
   }
 }
     `;
@@ -145,8 +173,11 @@ const defaultWrapper: SdkFunctionWrapper = (action, _operationName, _operationTy
 
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
   return {
-    allusers(variables?: AllusersQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<AllusersQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<AllusersQuery>(AllusersDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'allusers', 'query');
+    getUser(variables?: GetUserQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetUserQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetUserQuery>(GetUserDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getUser', 'query');
+    },
+    getUsers(variables?: GetUsersQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetUsersQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetUsersQuery>(GetUsersDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getUsers', 'query');
     }
   };
 }
