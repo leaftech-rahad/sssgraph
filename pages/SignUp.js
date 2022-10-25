@@ -1,12 +1,11 @@
 import * as React from "react";
 import Navbar from "../components/Navbar";
-import SERVER_URL from "../src/config/index";
 
 import { useMutation } from "react-query";
 import { createUser } from "../src/api";
 
 import { Box, Button, TextField, FormControl } from "@mui/material";
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const pages = ["Projects", "About Me", "Contact Me"];
   const settings = ["Profile", "Dashboard", "Login", "Logout"];
   return {
