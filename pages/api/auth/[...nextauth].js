@@ -1,11 +1,12 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import EmailProvider from "next-auth/providers/email";
-import { comparePassword } from "../../../src/bcrypt/compare";
+
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import prisma from "./lib/prismadb";
 import { db } from "../../../prisma/db";
-import { redirect } from "next/dist/server/api-utils";
+
+import bcrypt from "bcryptjs";
 export default NextAuth({
   session: {
     strategy: "jwt",
@@ -32,12 +33,8 @@ export default NextAuth({
             email: credentials.email,
           },
         });
-        const matchPassword = comparePassword(
-          credentials.password,
-          user.password
-        );
 
-        if (matchPassword) {
+        if (bcrypt.compareSync(credentials.password, user.password)) {
           // Any object returned will be saved in `user` property of the JWT
           return {
             id: user.id,
