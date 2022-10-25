@@ -1,7 +1,8 @@
 import React from "react";
 import Navbar from "../components/Navbar";
+import SERVER_URL from "../src/config/index";
 
-import { Box, TextField } from "@mui/material";
+import { Box, Button, TextField, FormControl } from "@mui/material";
 export async function getStaticProps() {
   const pages = ["Projects", "About Me", "Contact Me"];
   const settings = ["Profile", "Dashboard", "Login", "Logout"];
@@ -17,33 +18,29 @@ const SignUp = (props) => {
     <>
       <Navbar {...props} />
 
-      <Box
-        component="form"
-        sx={{
-          "& .MuiTextField-root": {
-            my: 2,
+      <Box textAlign="center">
+        <FormControl
+          action={SERVER_URL}
+          method="post"
+          component="form"
+          sx={{ my: 1 }}
+        >
+          <TextField sx={{ my: 1 }} required label="Name" type="text" />
 
-            width: "25ch",
-          },
-          textAlign: "center",
-          my: 5,
-        }}
-      >
-        <TextField
-          required
-          id="password"
-          label="Email"
-          type="email"
-          autoComplete="current-password"
-        />
-        <br />
-        <TextField
-          required
-          id="outlined-password-input"
-          label="Password"
-          type="password"
-          autoComplete="current-password"
-        />
+          <TextField sx={{ my: 1 }} required label="Username" type="text" />
+
+          <TextField sx={{ my: 1 }} required label="Email" type="email" />
+
+          <TextField sx={{ my: 1 }} required label="Password" type="password" />
+
+          <TextField sx={{ my: 1 }} required label="Phone" type="text" />
+
+          <TextField sx={{ my: 1 }} required label="Address" type="text" />
+
+          <Button sx={{ my: 1, p: 1 }} type="submit" variant="outlined">
+            SignUp
+          </Button>
+        </FormControl>
       </Box>
     </>
   );

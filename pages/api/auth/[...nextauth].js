@@ -5,6 +5,7 @@ import { comparePassword } from "../../../src/bcrypt/compare";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import prisma from "./lib/prismadb";
 import { db } from "../../../prisma/db";
+import { redirect } from "next/dist/server/api-utils";
 export default NextAuth({
   session: {
     strategy: "jwt",
@@ -91,26 +92,26 @@ export default NextAuth({
   jwt: {
     encryption: true,
   },
-  // events: {
-  //   async signIn(message) {
-  //     /* on successful sign in */
-  //   },
-  //   async signOut(message) {
-  //     /* on signout */
-  //   },
-  //   async createUser(message) {
-  //     /* user created */
-  //   },
-  //   async updateUser(message) {
-  //     /* user updated - e.g. their email was verified */
-  //   },
-  //   async linkAccount(message) {
-  //     /* account (e.g. Twitter) linked to a user */
-  //   },
-  //   async session(message) {
-  //     /* session is active */
-  //   },
-  // },
+  events: {
+    async signIn(message) {
+      /* on successful sign in */
+    },
+    //   async signOut(message) {
+    //     /* on signout */
+    //   },
+    //   async createUser(message) {
+    //     /* user created */
+    //   },
+    //   async updateUser(message) {
+    //     /* user updated - e.g. their email was verified */
+    //   },
+    //   async linkAccount(message) {
+    //     /* account (e.g. Twitter) linked to a user */
+    //   },
+    //   async session(message) {
+    //     /* session is active */
+    //   },
+  },
   pages: {
     signIn: "/Login",
     signOut: "/Logout",
