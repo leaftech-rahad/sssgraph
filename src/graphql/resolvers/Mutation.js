@@ -54,8 +54,8 @@ export const Mutation = {
 
   createUser: async (parent, { input }, { req }) => {
     //destructure from input
-    const { name, email, username, phone, address, role, password } = input;
-    console.log(name);
+    const { name, email, username, phone, address, password } = input;
+
     //creating new user
     const createAndSignIn = await db.prisma.user.create({
       data: {
@@ -64,24 +64,21 @@ export const Mutation = {
         username: username,
         phone: phone,
         address: address,
-        role: role,
+
         //hashing the password value using encrypt function in bcrypt.js
         password: (await encrypt(password)).toString(),
       },
     });
 
     //finding the newly created user to get the ID
-    const createdUser = await db.prisma.user.findUnique({
-      where: {
-        email: email,
-      },
-    });
-
-    //signing in the new user with the ID
-    req.session.userId = createdUser.ID;
+    // const createdUser = await db.prisma.user.findUnique({
+    //   where: {
+    //     email: email,
+    //   },
+    // });
 
     //returning the new user
-    return createdUser;
+    return createAndSignIn;
   },
 
   //------------------------------------------------------------------------------------------------
