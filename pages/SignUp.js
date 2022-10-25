@@ -1,11 +1,13 @@
 import React from "react";
 import Navbar from "../components/Navbar";
 
-import { Box, Typography, TextField } from "@mui/material";
+import { Box, TextField } from "@mui/material";
 export async function getStaticProps() {
-  const settings = ["Login"];
+  const pages = ["Projects", "About Me", "Contact Me"];
+  const settings = ["Profile", "Dashboard", "Login", "Logout"];
   return {
     props: {
+      pages,
       settings,
     },
   };

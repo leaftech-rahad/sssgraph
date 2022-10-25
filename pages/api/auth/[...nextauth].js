@@ -25,6 +25,7 @@ export default NextAuth({
       },
       async authorize(credentials, req) {
         // Add logic here to look up the user from the credentials supplied
+
         const user = await db.prisma.user.findUnique({
           where: {
             email: credentials.email,
@@ -110,4 +111,8 @@ export default NextAuth({
   //     /* session is active */
   //   },
   // },
+  pages: {
+    signIn: "/Login",
+    signOut: "/Logout",
+  },
 });

@@ -12,6 +12,7 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
+import Link from "next/link";
 
 const Navbar = ({ pages, settings }) => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -38,8 +39,6 @@ const Navbar = ({ pages, settings }) => {
           <Typography
             variant="h6"
             noWrap
-            component="a"
-            href="/"
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },
@@ -50,7 +49,7 @@ const Navbar = ({ pages, settings }) => {
               textDecoration: "none",
             }}
           >
-            Full_Stack
+            <Link href="/">Full_Stack</Link>
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -88,16 +87,17 @@ const Navbar = ({ pages, settings }) => {
                   onClick={handleCloseNavMenu}
                   sx={{ my: 0, py: 0, px: 0, mx: 0, color: "white" }}
                 >
-                  <Button
-                    href={page.replace(/\s/g, "")}
-                    key={page}
-                    onClick={handleCloseNavMenu}
-                    sx={{ my: 0, py: 0.8, px: 0.5, mx: 1, color: "white" }}
-                    variant="outlined"
-                    fullWidth
-                  >
-                    {page}
-                  </Button>
+                  <Link href={page.replace(/\s/g, "")}>
+                    <Button
+                      key={page}
+                      onClick={handleCloseNavMenu}
+                      sx={{ my: 0, py: 0.8, px: 0.5, mx: 1, color: "white" }}
+                      variant="outlined"
+                      fullWidth
+                    >
+                      {page}gg
+                    </Button>
+                  </Link>
                 </MenuItem>
               ))}
             </Menu>
@@ -106,8 +106,6 @@ const Navbar = ({ pages, settings }) => {
           <Typography
             variant="h6"
             noWrap
-            component="a"
-            href=""
             sx={{
               mr: 2,
               display: { xs: "flex", md: "none" },
@@ -119,12 +117,11 @@ const Navbar = ({ pages, settings }) => {
               textDecoration: "none",
             }}
           >
-            Full_Stack
+            <Link href="/">Full_Stack</Link>
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages?.map((page) => (
               <Button
-                href={page.replace(/\s/g, "")}
                 key={page}
                 onClick={handleCloseNavMenu}
                 sx={{
@@ -134,7 +131,7 @@ const Navbar = ({ pages, settings }) => {
                   fontWeight: "bold",
                 }}
               >
-                {page}
+                <Link href={page.replace(/\s/g, "")}>{page}</Link>
               </Button>
             ))}
           </Box>
@@ -169,14 +166,13 @@ const Navbar = ({ pages, settings }) => {
                     sx={{ my: 0, py: 0, px: 0, mx: 0, color: "white" }}
                   >
                     <Button
-                      href={settings.replace(/\s/g, "")}
                       key={settings}
                       onClick={handleCloseNavMenu}
                       sx={{ my: 0.2, py: 0.8, px: 0.5, mx: 1, color: "white" }}
                       variant="outlined"
                       fullWidth
                     >
-                      {settings}
+                      <Link href={settings.replace(/\s/g, "")}>{settings}</Link>
                     </Button>
                   </MenuItem>
                 ))}
