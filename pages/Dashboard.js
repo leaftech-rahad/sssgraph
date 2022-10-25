@@ -5,7 +5,7 @@ import { Box, Typography } from "@mui/material";
 import { dehydrate, useQuery } from "react-query";
 import { queryClient, getUser } from "../src/api";
 
-export async function getServerSideProps() {
+export async function getServerSideProps(req, res) {
   await queryClient.prefetchQuery(["getUser"], () =>
     getUser({ input: { username: "Alice" } })
   );
