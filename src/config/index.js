@@ -1,7 +1,4 @@
-// import absoluteUrl from "next-absolute-url";
-
-// const { origin } = absoluteUrl(req);
-const server = process.env.VERCEL_URL;
+const server = process.env.HOST_URL;
 export const SERVER_URL =
   process.env.NODE_ENV === "production"
     ? `https://${server}/api/graphql`
