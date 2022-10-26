@@ -33,7 +33,7 @@ const Navbar = ({ pages, settings }) => {
     setAnchorElUser(null);
   };
   return (
-    <AppBar position="static">
+    <AppBar position="static" sx={{ backgroundColor: "" }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Typography
@@ -78,24 +78,39 @@ const Navbar = ({ pages, settings }) => {
               open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
               sx={{
-                display: { xs: "block", md: "none" },
+                display: {
+                  xs: "block",
+                  md: "none",
+                  opacity: 0.8,
+                },
               }}
             >
               {pages?.map((page) => (
                 <MenuItem
                   key={page}
                   onClick={handleCloseNavMenu}
-                  sx={{ my: 0, py: 0, px: 0, mx: 0, color: "white" }}
+                  sx={{
+                    my: 0,
+                    py: 0,
+                    px: 0,
+                    mx: 0,
+                  }}
                 >
                   <Link href={page.replace(/\s/g, "")}>
                     <Button
                       key={page}
                       onClick={handleCloseNavMenu}
-                      sx={{ my: 0, py: 0.8, px: 0.5, mx: 1, color: "white" }}
-                      variant="outlined"
+                      sx={{
+                        my: 0,
+                        py: 0.8,
+                        px: 0.5,
+                        mx: 1,
+                        color: "white",
+                      }}
+                      variant="contained"
                       fullWidth
                     >
-                      {page}gg
+                      {page}
                     </Button>
                   </Link>
                 </MenuItem>
@@ -144,7 +159,7 @@ const Navbar = ({ pages, settings }) => {
                 </IconButton>
               </Tooltip>
               <Menu
-                sx={{ mt: "35px" }}
+                sx={{ mt: "35px", opacity: 0.8 }}
                 id="menu-appbar"
                 anchorEl={anchorElUser}
                 anchorOrigin={{
@@ -163,13 +178,18 @@ const Navbar = ({ pages, settings }) => {
                   <MenuItem
                     key={settings}
                     onClick={handleCloseNavMenu}
-                    sx={{ my: 0, py: 0, px: 0, mx: 0, color: "white" }}
+                    sx={{
+                      my: 0,
+                      py: 0,
+                      px: 0,
+                      mx: 0,
+                    }}
                   >
                     <Button
                       key={settings}
                       onClick={handleCloseNavMenu}
                       sx={{ my: 0.2, py: 0.8, px: 0.5, mx: 1, color: "white" }}
-                      variant="outlined"
+                      variant="contained"
                       fullWidth
                     >
                       <Link href={settings.replace(/\s/g, "")}>{settings}</Link>

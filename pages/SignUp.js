@@ -39,7 +39,7 @@ const SignUp = (props) => {
     <>
       <Navbar {...props} />
 
-      <Box textAlign="center">
+      <Box textAlign="center" sx={{ m: 5, backgroundColor: "white" }}>
         <FormControl
           // action={SERVER_URL}
           // method="post"
